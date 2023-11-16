@@ -18,6 +18,15 @@ int main()
 
     vector<Vector2f> vertices;
     vector<Vector2f> points;
+    bool userPrint = true;
+    sf::Font font;
+    if (!font.loadFromFile("FromCartoonBlocks.ttf")) cout << "Font failed to load" << endl;
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Click on three points on the screen to set the vertices for the triangle!");
+    text.setCharacterSize(24);
+    text.setPosition({ 100,100 });
+    //text.setFillColor(sf::Text::Bold | sf::Text::Underline);
 
 	while (window.isOpen())
 	{
@@ -29,6 +38,10 @@ int main()
         Event event;
 		while (window.pollEvent(event))
 		{
+            if (userPrint == true)
+            {
+               
+            }
             if (event.type == Event::Closed)
             {
 				// Quit the game when the window is closed
@@ -50,6 +63,7 @@ int main()
                     {
                         ///fourth click
                         ///push back to points vector
+                        points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
                     }
                 }
             }
@@ -70,6 +84,8 @@ int main()
             ///select random vertex
             ///calculate midpoint between random vertex and the last point in the vector
             ///push back the newly generated coord.
+            
+
         }
 
         /*
@@ -78,6 +94,7 @@ int main()
 		****************************************
 		*/
         window.clear();
+        window.draw(text);
         for(int i = 0; i < vertices.size(); i++)
         {
             RectangleShape rect(Vector2f(10,10));
